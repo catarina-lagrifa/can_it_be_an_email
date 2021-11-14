@@ -13,6 +13,7 @@
   --h2-size: 2rem;
   --h3-size: 1.375rem;
   --h4-size: 1.125rem;
+  --h5-size: 1.125rem;
   --label-size: 1.125rem;
 
   --margin-top: 80px;
@@ -26,6 +27,7 @@
     --h2-size: 1.875rem;
     --h3-size: 1.25rem;
     --h4-size: 1rem;
+    --h5-size: 1rem;
     --label-size: 1rem;
 
     --margin-top: 40px;

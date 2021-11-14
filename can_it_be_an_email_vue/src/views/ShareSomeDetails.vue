@@ -1,8 +1,9 @@
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Selector from "@/components/Selector";
 import Checkbox from "@/components/Checkbox";
+import { useStore } from "@/store/store";
 
 export default {
   name: "share",
@@ -15,6 +16,11 @@ export default {
     windowWidth: Number,
   },
   setup(props) {
+    const { app } = useStore();
+    onMounted(() => {
+      console.log(app);
+    });
+
     const orientation = computed(() => {
       if (props.windowWidth < 1024) return "columns";
       else "rows";
@@ -52,12 +58,6 @@ export default {
       }
     });
 
-    const people = ref(2);
-    const time = ref(5);
-    const decision = ref(true);
-    const available = ref(true);
-    const complexity = ref(2);
-
     const timeList = ref([
       { value: 5, label: "5 minutes" },
       { value: 10, label: "10 minutes" },
@@ -75,27 +75,22 @@ export default {
       { value: false, label: "No" },
     ]);
 
-    const runCalculation = () => {};
-
     const { push } = useRouter();
 
-    const goto = () => {
-      push("/share-some-details");
+    const getAnswer = () => {
+      let path = emailOrMeeting();
+      push(`/${path}`);
     };
 
     return {
+      getters: app.getters,
       orientation,
       wrapperSizing,
       formSizing,
       imageSizing,
-      people,
-      time,
-      decision,
-      available,
-      complexity,
       timeList,
       booleanList,
-      runCalculation,
+      getAnswer,
       goto,
     };
   },
@@ -110,6 +105,7 @@ export default {
         Answer the following questions based on the meeting you intend on having
       </p>
     </div>
+    {{ getters.number_of_people }}
     <form :class="formSizing">
       <div class="field" :class="orientation">
         <label for="people">How many people will be needed?</label>

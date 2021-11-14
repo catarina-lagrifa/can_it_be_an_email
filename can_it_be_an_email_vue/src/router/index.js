@@ -18,13 +18,13 @@ const routes = [
   },
   {
     path: "/email",
-    name: "Email",
+    name: "email",
     component: () =>
       import(/* webpackChunkName: "email" */ "../views/Email.vue"),
   },
   {
     path: "/meeting",
-    name: "Meeting",
+    name: "meeting",
     component: () =>
       import(/* webpackChunkName: "meeting" */ "../views/Meeting.vue"),
   },

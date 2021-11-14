@@ -45,6 +45,13 @@ h4 {
   letter-spacing: 0;
 }
 
+h5 {
+  color: var(--color-type-dark);
+  font-size: var(--h4-size);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
 label {
   color: var(--color-type-dark);
   font-size: var(--label-size);
@@ -61,7 +68,7 @@ p {
   padding: 0;
 }
 
-p.bold {
+.bold {
   font-weight: 600;
 }
 
