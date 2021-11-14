@@ -4,7 +4,7 @@ import { ref, computed } from "vue";
 export default {
   props: {
     id: String,
-    modelValue: { type: [String, Boolean], default: null },
+    modelValue: { type: [String, Boolean, Number], default: null },
     options: { type: Array, required: true },
     a11y: Boolean,
   },

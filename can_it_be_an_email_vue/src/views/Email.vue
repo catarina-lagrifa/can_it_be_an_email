@@ -1,5 +1,6 @@
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useStore } from "@/store/store";
 
 export default {
   name: "email",
@@ -8,6 +9,8 @@ export default {
     windowWidth: Number,
   },
   setup(props) {
+    const { app } = useStore();
+
     const orientation = computed(() => {
       if (props.windowWidth < 1024) return "columns";
       else "rows";
@@ -45,16 +48,15 @@ export default {
       }
     });
 
-    const hourlyRate = ref(4);
+    const hourlyRate = ref(undefined);
+
+    onMounted(() => {
+      hourlyRate.value = app.getters?.hourly_rate_of_employees;
+    });
 
     const totalCost = computed(() => {
-      // let a = app.getters;
-      return 6;
-      // return (
-      //   (a.length_of_meeting / 60) *
-      //   a.number_of_people *
-      //   a.hourly_rate_of_employees
-      // );
+      let a = app.getters;
+      return parseInt(a.lengthOfMeeting * a.numberOfPeople * hourlyRate.value);
     });
 
     return {

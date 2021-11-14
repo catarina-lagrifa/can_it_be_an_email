@@ -4,4 +4,11 @@ import router from "./router";
 import store from "./store";
 import "./assets/assets";
 
-createApp(App).use(store).use(router).mount("#app");
+import { registStore } from "@/store/store";
+
+const app = createApp(App);
+app.use(router);
+
+registStore(app);
+
+app.mount("#app");

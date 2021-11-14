@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import Selector from "@/components/Selector";
 import Checkbox from "@/components/Checkbox";
 import { useStore } from "@/store/store";
+import useEmailOrMeeting from "@/hooks/useEmailOrMeeting";
 
 export default {
   name: "share",
@@ -17,9 +18,6 @@ export default {
   },
   setup(props) {
     const { app } = useStore();
-    onMounted(() => {
-      console.log(app);
-    });
 
     const orientation = computed(() => {
       if (props.windowWidth < 1024) return "columns";
@@ -75,10 +73,11 @@ export default {
       { value: false, label: "No" },
     ]);
 
+    const getPath = useEmailOrMeeting();
     const { push } = useRouter();
 
     const getAnswer = () => {
-      let path = emailOrMeeting();
+      let path = getPath;
       push(`/${path}`);
     };
 
@@ -91,7 +90,6 @@ export default {
       timeList,
       booleanList,
       getAnswer,
-      goto,
     };
   },
 };
@@ -105,26 +103,29 @@ export default {
         Answer the following questions based on the meeting you intend on having
       </p>
     </div>
-    {{ getters.number_of_people }}
     <form :class="formSizing">
       <div class="field" :class="orientation">
         <label for="people">How many people will be needed?</label>
         <input
           id="people"
-          v-model="people"
+          v-model="getters.numberOfPeople"
           type="number"
           class="grid-column-2"
         />
       </div>
       <div class="field" :class="orientation">
         <label for="time">How long do you expect the meeting to last?</label>
-        <selector id="time" v-model:modelValue="time" :options="timeList" />
+        <selector
+          id="time"
+          v-model:modelValue="getters.lengthOfMeeting"
+          :options="timeList"
+        />
       </div>
       <div class="field" :class="orientation">
         <label for="decision">Does a decision have to be made?</label>
         <selector
           id="decision"
-          v-model:modelValue="decision"
+          v-model:modelValue="getters.isDecisionMade"
           :options="booleanList"
         />
       </div>
@@ -132,13 +133,16 @@ export default {
         <label for="available">Is everyone avaliable?</label>
         <selector
           id="available"
-          v-model:modelValue="available"
+          v-model:modelValue="getters.isEveryoneAvailable"
           :options="booleanList"
         />
       </div>
       <div class="field" :class="orientation">
         <label for="complexity">What is the complexity of the issue?</label>
-        <checkbox id="complexity" v-model:modelValue="complexity" />
+        <checkbox
+          id="complexity"
+          v-model:modelValue="getters.issueComplexity"
+        />
       </div>
     </form>
     <button
@@ -146,8 +150,8 @@ export default {
       tabindex="0"
       aria-label="Get answer"
       :class="{ 'a11y-focus': a11y }"
-      @click="runCalculation"
-      @keydown.enter="runCalculation"
+      @click="getAnswer"
+      @keydown.enter="getAnswer"
     >
       Get answer
     </button>
