@@ -4,6 +4,14 @@ body {
   padding: 0;
 }
 
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
 .grid-column-1 {
   width: var(--grid-column);
 }

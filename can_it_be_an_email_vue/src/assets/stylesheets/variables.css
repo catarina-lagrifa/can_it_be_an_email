@@ -5,6 +5,8 @@
   --color-type-dark: hsl(236, 72%, 14%);
   --color-type-medium: hsl(236, 20%, 38%);
   --color-white: hsl(100, 100%, 100%);
+  --color-shadow: 0, 0%, 20%;
+  --color-action-shadow: 246, 92%, 26%;
 
   --h1-size: 3.5625rem;
   --h2-size: 2rem;
