@@ -17,7 +17,7 @@
   :root {
     --column-number: 1;
     --h1-size: 2.625rem;
-    --h1-size: 1.875rem;
+    --h2-size: 1.875rem;
     --label-size: 1rem;
   }
 }
@@ -28,7 +28,14 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  :root {
+    --column-number: 8;
+    --h1-size: 2.625rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
   :root {
     --column-number: 12;
   }

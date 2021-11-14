@@ -3,16 +3,7 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 export default {
   setup() {
     const a11y = ref(true);
-
-    onMounted(() => {
-      document.body.addEventListener("keydown", keyMovement);
-      document.body.addEventListener("mousemove", mouseovement);
-    });
-
-    onBeforeUnmount(() => {
-      document.body.removeEventListener("keydown", keyMovement);
-      document.body.removeEventListener("mousemove", mouseMovement);
-    });
+    const windowWidth = ref(window.innerWidth);
 
     const keyMovement = () => {
       a11y.value = true;
@@ -22,38 +13,51 @@ export default {
       a11y.value = false;
     };
 
+    const resize = () => (windowWidth.value = window.innerWidth);
+
+    onMounted(() => {
+      document.body.addEventListener("keydown", keyMovement);
+      document.body.addEventListener("mousemove", mouseMovement);
+      window.addEventListener("resize", resize);
+    });
+
+    onBeforeUnmount(() => {
+      document.body.removeEventListener("keydown", keyMovement);
+      document.body.removeEventListener("mousemove", mouseMovement);
+      window.removeEventListener("resize", resize);
+    });
+
     return {
       a11y,
+      windowWidth,
       keyMovement,
       mouseMovement,
+      resize,
     };
   },
 };
 </script>
 <template>
-  <router-view />
+  <div class="main-container">
+    <router-view :a11y="a11y" :windowWidth="windowWidth" />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  height: 800px;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+<style scoped>
+.main-container {
+  width: inherit;
+  height: 100vh;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 </style>
