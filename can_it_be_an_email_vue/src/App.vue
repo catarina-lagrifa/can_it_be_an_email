@@ -1,5 +1,7 @@
 <script>
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
     const a11y = ref(true);
@@ -27,18 +29,21 @@ export default {
       window.removeEventListener("resize", resize);
     });
 
+    const { currentRoute } = useRouter();
+
     return {
       a11y,
       windowWidth,
       keyMovement,
       mouseMovement,
       resize,
+      currentRoute,
     };
   },
 };
 </script>
 <template>
-  <div class="main-container">
+  <div class="main-container" :class="currentRoute.name">
     <router-view :a11y="a11y" :windowWidth="windowWidth" />
   </div>
 </template>
@@ -47,6 +52,7 @@ export default {
 .main-container {
   width: inherit;
   height: 100vh;
+  -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   display: -webkit-box;
@@ -56,6 +62,9 @@ export default {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.main-container.home {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;

@@ -3,7 +3,7 @@ import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
-  name: "Home",
+  name: "home",
   props: {
     a11y: Boolean,
     windowWidth: Number,
@@ -17,8 +17,7 @@ export default {
     const imageSizing = computed(() => {
       if (props.windowWidth < 768) {
         return "grid-column-1";
-      }
-      if (props.windowWidth >= 768 && props.windowWidth < 1024) {
+      } else if (props.windowWidth >= 768 && props.windowWidth < 1024) {
         return "grid-column-3";
       } else if (props.windowWidth >= 1024 && props.windowWidth < 1280) {
         return "grid-column-4";
@@ -80,6 +79,7 @@ export default {
 
 <style scoped>
 .home-wrapper {
+  -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   display: -webkit-box;
@@ -91,6 +91,7 @@ export default {
 }
 
 .home-text-container {
+  -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   display: -webkit-box;

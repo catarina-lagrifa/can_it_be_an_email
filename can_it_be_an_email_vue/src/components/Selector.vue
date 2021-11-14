@@ -15,7 +15,9 @@ export default {
     const optionRefs = ref([]);
     const focusedIdx = ref(null);
     const showDropdown = ref(false);
-    const selectedRef = ref(null);
+    const selectedRef = computed(() => {
+      return props.options?.find((f) => f.value == props.modelValue);
+    });
 
     const setOptionRef = (el) => {
       if (el) optionRefs.value.push(el);
@@ -102,7 +104,7 @@ export default {
   <div
     class="selector-wrapper"
     :class="{ active: showDropdown }"
-    v-click-outside="closeDropdown"
+    @mouseleave="closeDropdown"
   >
     <div class="selector">
       <div
@@ -112,7 +114,7 @@ export default {
         :aria-labelledby="`${id}_dropdown ${id}_selector`"
         :aria-expanded="showDropdown"
         :id="`${id}_selector`"
-        class="selector-text"
+        class="selector-label"
         :class="{ 'a11y-focus': a11y }"
         @keyup.up.prevent="previousOption"
         @keyup.down.prevent="nextOption"
@@ -121,10 +123,10 @@ export default {
         @click="toggleDropdown"
       >
         <p>
-          {{ selectedRef.text }}
+          {{ selectedRef.label }}
         </p>
-        <span class="selector-arrow material-icons-rounded">
-          {{ showDropdown ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
+        <span class="selector-arrow material-icons-round">
+          {{ showDropdown ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
         </span>
       </div>
       <ul
@@ -156,7 +158,7 @@ export default {
           @click.stop.prevent="selectOption(opt)"
         >
           <p>
-            {{ opt.text }}
+            {{ opt.label }}
           </p>
         </li>
       </ul>
@@ -167,23 +169,43 @@ export default {
 <style scoped>
 .selector-wrapper {
   position: relative;
+  width: var(--grid-column-2);
+}
+
+.selector {
+  width: inherit;
 }
 
 .selector * {
   cursor: pointer;
 }
 
-.selector-text {
+.selector-label {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  background-color: var(--color-white);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 1px 5px 0px hsla(var(--color-shadow), 0.2),
+    0px 2px 2px 0px hsla(var(--color-shadow), 0.14),
+    0px 3px 1px -2px hsla(var(--color-shadow), 0.12);
+  box-shadow: 0px 1px 5px 0px hsla(var(--color-shadow), 0.2),
+    0px 2px 2px 0px hsla(var(--color-shadow), 0.14),
+    0px 3px 1px -2px hsla(var(--color-shadow), 0.12);
+  box-sizing: border-box;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding-right: 16px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 12px 16px;
+  white-space: nowrap;
+  width: inherit;
 }
 
-.selector-text:hover {
+.selector-label:hover {
   -webkit-box-shadow: 0px 1px 5px 0px hsla(var(--color-action-shadow), 0.2),
     0px 2px 2px 0px hsla(var(--color-action-shadow), 0.14),
     0px 3px 1px -2px hsla(var(--color-action-shadow), 0.12);
@@ -192,23 +214,64 @@ export default {
     0px 3px 1px -2px hsla(var(--color-action-shadow), 0.12);
 }
 
-.selector-text:active {
+.selector-label:active {
   background-color: var(--color-action-disabled);
 }
 
 .selector-arrow {
   color: var(--color-type-medium);
+  font-size: 1.125rem;
   margin-left: 16px;
   transform: translateY(1px);
 }
 
 .dropdown {
+  background-color: var(--color-white);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
   -webkit-box-shadow: 0px 1px 5px 0px hsla(var(--color-action-shadow), 0.2),
     0px 2px 2px 0px hsla(var(--color-action-shadow), 0.14),
     0px 3px 1px -2px hsla(var(--color-action-shadow), 0.12);
   box-shadow: 0px 1px 5px 0px hsla(var(--color-action-shadow), 0.2),
     0px 2px 2px 0px hsla(var(--color-action-shadow), 0.14),
     0px 3px 1px -2px hsla(var(--color-action-shadow), 0.12);
+  margin: 0;
+  max-height: calc(var(--layout-column-2) * 0.5);
+  overflow-y: auto;
+  padding: 5px;
+  position: absolute;
+  transform: translateY(1px);
+  width: inherit;
+  white-space: nowrap;
   z-index: 10;
+}
+
+.dropdown * {
+  cursor: pointer;
+}
+
+.dropdown li {
+  margin-bottom: 8px;
+  padding: 8px 16px 8px 12px;
+}
+
+.dropdown li:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown li.selected p {
+  color: var(--color-type-dark);
+  font-weight: 500;
+}
+
+.dropdown li:hover,
+.dropdown li.focused {
+  border-radius: 3px;
+  background-color: var(--color-action-background);
+}
+
+.dropdown li:hover p,
+.dropdown li.focused p {
+  color: var(--color-action-hover);
 }
 </style>

@@ -7,6 +7,7 @@ button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   color: var(--color-white);
+  cursor: pointer;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -19,24 +20,26 @@ button {
   margin-top: 32px;
   padding: 12px 24px;
   text-transform: uppercase;
+  opacity: 0.9;
 }
 
 button:hover {
-  -webkit-box-shadow: 0px 1px 5px 0px hsla(var(--color-shadow), 0.2),
-    0px 2px 2px 0px hsla(var(--color-shadow), 0.14),
-    0px 3px 1px -2px hsla(var(--color-shadow), 0.12);
-  box-shadow: 0px 1px 5px 0px hsla(var(--color-shadow), 0.2),
-    0px 2px 2px 0px hsla(var(--color-shadow), 0.14),
-    0px 3px 1px -2px hsla(var(--color-shadow), 0.12);
+  -webkit-box-shadow: 0px 2px 4px -1px hsla(var(--color-action-shadow), 0.2),
+    0px 4px 5px 0px hsla(var(--color-action-shadow), 0.14),
+    0px 1px 10px 0px hsla(var(--color-action-shadow), 0.12);
+  box-shadow: 0px 2px 4px -1px hsla(var(--color-action-shadow), 0.2),
+    0px 4px 5px 0px hsla(var(--color-action-shadow), 0.14),
+    0px 1px 10px 0px hsla(var(--color-action-shadow), 0.12);
+  opacity: 1;
   outline: none !important;
 }
 
 button:focus,
 button:active {
-  -webkit-box-shadow: 0px 0px 5px 0px hsla(var(--color-shadow), 0.2),
-    0px 1px 2px 0px hsla(var(--color-shadow), 0.14),
-    0px 2px 1px -2px hsla(var(--color-shadow), 0.12);
-  box-shadow: 0px 0px 5px 0px hsla(var(--color-shadow), 0.2),
-    0px 1px 2px 0px hsla(var(--color-shadow), 0.14),
-    0px 2px 1px -2px hsla(var(--color-shadow), 0.12);
+  -webkit-box-shadow: 0px 1px 5px 0px hsla(var(--color-action-shadow), 0.2),
+    0px 2px 2px 0px hsla(var(--color-action-shadow), 0.14),
+    0px 3px 1px -2px hsla(var(--color-action-shadow), 0.12);
+  box-shadow: 0px 1px 5px 0px hsla(var(--color-action-shadow), 0.2),
+    0px 2px 2px 0px hsla(var(--color-action-shadow), 0.14),
+    0px 3px 1px -2px hsla(var(--color-action-shadow), 0.12);
 }
