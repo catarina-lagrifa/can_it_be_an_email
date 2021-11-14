@@ -1,5 +1,5 @@
 <template>
-  <div class="#">
+  <div class="about">
     <h1>Share some details</h1>
     <p>Answer the following questions based on the meeting you intend on having</p>
     <h4>How many people will be needed?</h4>
