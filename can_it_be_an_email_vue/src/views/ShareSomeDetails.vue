@@ -7,6 +7,9 @@
     <h4>Does a decision have to be made?</h4>
     <h4>Is everyone avaliable?</h4>
     <h4>What is the complexity of the issue?</h4>
+    <select>None</select>
+    <select>Extreme</select>
+    <button>GET ANSWER</button>
   </div>
 </template>
 
