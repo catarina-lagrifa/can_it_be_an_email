@@ -10,8 +10,6 @@ export default {
   },
   emits: ["update:modelValue", "close"],
   setup(props, { emit }) {
-    const { t } = useI18n();
-
     const selector = ref(null);
     const dropdown = ref(null);
     const optionRefs = ref([]);
@@ -82,7 +80,6 @@ export default {
     };
 
     return {
-      t,
       selector,
       dropdown,
       optionRefs,
