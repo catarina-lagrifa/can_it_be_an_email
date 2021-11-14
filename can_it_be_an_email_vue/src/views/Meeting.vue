@@ -1,5 +1,5 @@
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "@/store/store";
 
 export default {
@@ -41,10 +41,8 @@ export default {
         return "grid-column-1";
       } else if (props.windowWidth >= 768 && props.windowWidth < 1024) {
         return "grid-column-3";
-      } else if (props.windowWidth >= 1024 && props.windowWidth < 1280) {
-        return "grid-column-4";
       } else {
-        return "grid-column-6";
+        return "grid-column-4";
       }
     });
 
