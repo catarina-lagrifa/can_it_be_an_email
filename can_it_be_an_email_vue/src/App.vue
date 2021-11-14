@@ -1,9 +1,41 @@
+<script>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+export default {
+  setup() {
+    const a11y = ref(true);
+
+    onMounted(() => {
+      document.body.addEventListener("keydown", keyMovement);
+      document.body.addEventListener("mousemove", mouseovement);
+    });
+
+    onBeforeUnmount(() => {
+      document.body.removeEventListener("keydown", keyMovement);
+      document.body.removeEventListener("mousemove", mouseMovement);
+    });
+
+    const keyMovement = () => {
+      a11y.value = true;
+    };
+
+    const mouseMovement = () => {
+      a11y.value = false;
+    };
+
+    return {
+      a11y,
+      keyMovement,
+      mouseMovement,
+    };
+  },
+};
+</script>
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -20,7 +52,7 @@
 }
 
 #nav a {
-  height:800px;
+  height: 800px;
   font-weight: bold;
   color: #2c3e50;
 }
