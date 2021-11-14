@@ -1,0 +1,63 @@
+:root {
+  --color-action: hsla(248, 82%, 57%);
+  --color-action-hover: hsl(246, 92%, 26%);
+  --color-action-disabled: hsl(238, 35%, 83%);
+  --color-type-dark: hsl(236, 72%, 14%);
+  --color-type-medium: hsl(236, 20%, 38%);
+  --color-white: hsl(100, 100%, 100%);
+
+  --h1-size: 3.5625rem;
+  --h2-size: 2rem;
+  --label-size: 1.125rem;
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --column-number: 1;
+    --h1-size: 2.625rem;
+    --h1-size: 1.875rem;
+    --label-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --column-number: 4;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --column-number: 12;
+  }
+}
+
+:root {
+  --grid-gutter: 20px;
+  --grid-gutter-all: calc(var(--grid-gutter) * 11);
+
+  --grid-margin-left: 20px;
+  --grid-margin-right: 20px;
+
+  --grid-margins: calc(var(--grid-margin-left) + var(--grid-margin-right));
+
+  --grid-content: calc(100vw - var(--grid-margins));
+
+  --grid-column: calc(
+    (var(--grid-content) - var(--grid-gutter-all)) / var(--column-number)
+  );
+
+  --grid-add-column: calc(var(--grid-gutter) + var(--grid-column));
+
+  --grid-column-2: calc(var(--grid-column) + var(--grid-add-column));
+  --grid-column-3: calc(var(--grid-column-2) + var(--grid-add-column));
+  --grid-column-4: calc(var(--grid-column-3) + var(--grid-add-column));
+  --grid-column-5: calc(var(--grid-column-4) + var(--grid-add-column));
+  --grid-column-6: calc(var(--grid-column-5) + var(--grid-add-column));
+  --grid-column-7: calc(var(--grid-column-6) + var(--grid-add-column));
+  --grid-column-8: calc(var(--grid-column-7) + var(--grid-add-column));
+  --grid-column-9: calc(var(--grid-column-8) + var(--grid-add-column));
+  --grid-column-10: calc(var(--grid-column-9) + var(--grid-add-column));
+  --grid-column-11: calc(var(--grid-column-10) + var(--grid-add-column));
+  --grid-column-12: calc(var(--grid-column-11) + var(--grid-add-column));
+}

@@ -20,6 +20,7 @@
 }
 
 #nav a {
+  height:800px;
   font-weight: bold;
   color: #2c3e50;
 }
