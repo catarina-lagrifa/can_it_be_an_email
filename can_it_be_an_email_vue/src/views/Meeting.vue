@@ -53,7 +53,6 @@ export default {
     });
 
     const totalCost = computed(() => {
-      console.log(app.getters);
       let a = app.getters;
       return parseInt(
         (a.lengthOfMeeting / 60) * a.numberOfPeople * hourlyRate.value
